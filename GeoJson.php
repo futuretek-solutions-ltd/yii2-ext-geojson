@@ -26,12 +26,15 @@ class GeoJson
      * Add object to GeoJSON
      *
      * @param TypeInterface $object
+     * @return self
      * @throws \yii\base\InvalidParamException
      */
     public function add(TypeInterface $object)
     {
         $this->_validate($object);
         $this->_items[] = $object;
+
+        return $this;
     }
 
     /**
