@@ -14,7 +14,7 @@ use yii\base\InvalidParamException;
 class FeatureCollection implements TypeInterface
 {
     /**
-     * @var Feature
+     * @var Feature[]
      */
     private $_features;
     /**
@@ -53,7 +53,11 @@ class FeatureCollection implements TypeInterface
      */
     public function export()
     {
-        $arr = ['type' => $this->getType(), 'features' => $this->_features->export()];
+        $result = [];
+        foreach ($this->_features as $feature) {
+            $result[] = $feature->export();
+        }
+        $arr = ['type' => $this->getType(), 'features' => $result];
         if ($this->_bBox instanceof BBox) {
             $arr['bbox'] = $this->_bBox->export();
         }
